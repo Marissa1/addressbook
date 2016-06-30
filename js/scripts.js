@@ -12,6 +12,10 @@ Contact.prototype.fullName = function () {
   return this.firstName + " " + this.lastName + " ";
 
 };
+
+Address.prototype.fullAddress = function() {
+  return this.street + ", " + this.city + ", " +this.state;
+};
 var lisa = new Contact("Lisa", "Simpson");
 var home = new Address("742 Evergreen Terrace", "Springfield", "Oregon");
 
@@ -57,9 +61,9 @@ $(document).ready(function() {
     $("#show-contact h2").text(newContact.firstName);
     $(".first-name").text(newContact.firstName);
     $(".last-name").text(newContact.lastName);
-//    $("ul#address").text("");
+    $("ul#address").text("");
     newContact.addresses.forEach(function(address) {
-      $("ul#addresses").append("<li>" + address.street + ", " + address.city + " " + address.state + "</li>");
+      $("ul#addresses").append("<li>" + address.fullAddress() + "</li>");
     });
    });
    $("input#new-first-name").val("");
