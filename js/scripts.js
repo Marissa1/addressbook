@@ -16,30 +16,28 @@ Contact.prototype.fullName = function () {
 Address.prototype.fullAddress = function() {
   return this.street + ", " + this.city + ", " +this.state;
 };
-var lisa = new Contact("Lisa", "Simpson");
-var home = new Address("742 Evergreen Terrace", "Springfield", "Oregon");
 
 $(document).ready(function() {
   $("#add-address").click(function(){
     $("#new-addresses").append(
-      '<div class="new-address">' +
-        '<div class="form-group">' +
-          '<label for="new-street">street</label>' +
-          '<input type="text" class="form-control, new-street" id="new-street">' +
-        '</div>' +
-        '<div class="form-group">' +
-          '<label for="new-city">city</label>' +
-          '<input type="text" class="form-control, new-city" id="new-city">' +
-        '</div>' +
-        '<div class="form-group">' +
-          '<label for="new-state">state</label>' +
-          '<input type="text" class="form-control, new-state" id="new-state">' +
+      '<div class="multiple-address">' +
+          '<div class="form-group">' +
+            '<label for="new-street">street</label>' +
+            '<input type="text" class="form-control, new-street" id="new-street">' +
+          '</div>' +
+          '<div class="form-group">' +
+            '<label for="new-city">city</label>' +
+            '<input type="text" class="form-control, new-city" id="new-city">' +
+          '</div>' +
+          '<div class="form-group">' +
+            '<label for="new-state">state</label>' +
+            '<input type="text" class="form-control, new-state" id="new-state">' +
         '</div>' +
       '</div>');
   });
   $("form#new-contact").submit(function(event) {
     event.preventDefault();
-
+    $(".multiple-address").not(document.getElementsByClassName(".firstAddress")).css("display","none");
     var inputtedFirstName = $("input#new-first-name").val();
     var inputtedLastName = $("input#new-last-name").val();
     var newContact = new Contact(inputtedFirstName, inputtedLastName);
@@ -66,11 +64,21 @@ $(document).ready(function() {
       $("ul#addresses").append("<li>" + address.fullAddress() + "</li>");
     });
    });
-   $("input#new-first-name").val("");
+resetFields();
+/*   $("input#new-first-name").val("");
    $("input#new-last-name").val("");
    $("input#new-street").val("");
    $("input#new-city").val("");
    $("input#new-state").val("");
+*/
   });
 
+  function resetFields() {
+    $("input#new-first-name").val("");
+    $("input#new-last-name").val("");
+    $("input#new-street").val("");
+    $("input#new-city").val("");
+    $("input#new-state").val("");
+
+  };
 });
